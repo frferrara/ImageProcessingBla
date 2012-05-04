@@ -10,11 +10,12 @@
 
 
 #include "IPState.hpp"
+#include "FullImg.hpp"
 
 
-class FullImg : public IPState {
+class ROI : public IPState {
 public:
-	virtual ~FullImg() {}
+	virtual ~ROI() {}
 
 	static IPState * Instance();
 
@@ -22,7 +23,7 @@ public:
 								const cv::Mat & img );
 
 protected:
-	FullImg() {}
+	ROI() {}
 
 private:
 	static IPState * instance;
