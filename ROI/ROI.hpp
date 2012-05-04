@@ -9,6 +9,8 @@
 #define ROI_HPP_
 
 
+#include <stdexcept>
+
 #include "IPState.hpp"
 #include "FullImg.hpp"
 
