@@ -12,12 +12,14 @@ include_directories( /opt/local/include
                      ImageProcessing
                      IPState
                      FullImg 
-                     ROI )
+                     ROI 
+                     IPXMLParser )
                      
 add_subdirectory( ImageProcessing )
 add_subdirectory( IPState )
 add_subdirectory( FullImg )
 add_subdirectory( ROI )
+add_subdirectory( IPXMLParser )
 
 add_executable( main main.cpp )
-target_link_libraries( main ImageProcessing )
+target_link_libraries( main ImageProcessing IPXMLParser )
