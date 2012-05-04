@@ -9,9 +9,13 @@
 #define FULLIMG_HPP_
 
 
+#include <stdexcept>
+
 #include "IPState.hpp"
 #include "ROI.hpp"
 
+
+class ROI;
 
 class FullImg : public IPState {
 public:
@@ -23,10 +27,12 @@ public:
 								const cv::Mat & img );
 
 protected:
-	FullImg() {}
+	FullImg();
 
 private:
 	static IPState * instance;
+
+	IPState * roi;
 };
 
 
