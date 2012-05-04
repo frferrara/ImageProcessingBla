@@ -10,6 +10,7 @@
 
 
 #include "IPState.hpp"
+#include "ROI.hpp"
 
 
 class FullImg : public IPState {

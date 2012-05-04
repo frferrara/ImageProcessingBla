@@ -21,7 +21,7 @@ cv::Mat FullImg::processImg( ImageProcessing * ip, \
 							 const cv::Mat & img ) {
 	std::cout << "\nSTATE 1\n";
 
-	changeState( ip, this );
+	changeState( ip, ROI::Instance() );
 
 	return img;
 }
