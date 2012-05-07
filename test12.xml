@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Properties>
+	<Property name="hsvMin" hMin="2.0" sMin="25.0" vMin="-15.0"/>
+	<Property name="hsvMax" hMax="25.0" sMax="150.0" vMax="230.0"/>
+</Properties>
