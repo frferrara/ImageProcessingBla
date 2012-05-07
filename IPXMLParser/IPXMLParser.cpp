@@ -34,10 +34,8 @@ void IPXMLParser::parseXML() {
     el = hDoc.FirstChildElement( "Properties" ).ToElement();
 
     if ( !el )
-        throw std::runtime_error( "Exception: XML file empty!" );
-
-    if ( strcmp( el->Value(), "Properties" ) != 0 )
-        throw std::runtime_error( "Exception: Root is not 'Properties'!" );
+        throw std::runtime_error(
+                "Exception: XML file empty or 'Properties' missing!" );
 
     hRoot = TiXmlHandle( el );
 
@@ -46,39 +44,52 @@ void IPXMLParser::parseXML() {
     if ( !properties )
         throw std::runtime_error( "Exception: 'Properties' is empty!" );
 
-    double hMin, sMin, vMin, hMax, sMax, vMax;
-
-    for ( ; properties; properties = properties->NextSiblingElement( "Property" ) ) {
+    for ( ; properties;
+            properties = properties->NextSiblingElement( "Property" ) ) {
         const char * elName = properties->Attribute( "name" );
+
+        if ( !properties )
+            throw std::runtime_error( "Exception: no element named Property!" );
 
         if ( strcmp( elName, "hsvMin" ) != 0
                 && std::strcmp( elName, "hsvMax" ) != 0 )
             throw std::runtime_error(
-                    "Exception: hsvMin and/or hsvMax not available!" );
+                    "Exception: hsvMin and hsvMax not available!" );
 
         if ( strcmp( elName, "hsvMin" ) == 0 ) {
+            double hMin, sMin, vMin;
+
             properties->QueryDoubleAttribute( "hMin", &hMin );
             properties->QueryDoubleAttribute( "sMin", &sMin );
             properties->QueryDoubleAttribute( "vMin", &vMin );
+
+            hsvMin = cv::Scalar( hMin, sMin, vMin );
+
+            std::cout << "hsvMin: " << hsvMin( 0 ) << " " << hsvMin( 1 ) << " "
+                    << hsvMin( 2 ) << " " << hsvMin( 3 ) << std::endl;
         }
 
         if ( strcmp( elName, "hsvMax" ) == 0 ) {
+            double hMax, sMax, vMax;
+
             properties->QueryDoubleAttribute( "hMax", &hMax );
             properties->QueryDoubleAttribute( "sMax", &sMax );
             properties->QueryDoubleAttribute( "vMax", &vMax );
+
+            hsvMax = cv::Scalar( hMax, sMax, vMax );
+
+            std::cout << "hsvMax: " << hsvMax( 0 ) << " " << hsvMax( 1 ) << " "
+                    << hsvMax( 2 ) << " " << hsvMax( 3 ) << std::endl;
         }
     }
-    hsvMin = cv::Scalar( hMin, sMin, vMin );
-    hsvMax = cv::Scalar( hMax, sMax, vMax );
-
-    std::cout << "hsvMin: " << hsvMin( 0 ) << " " << hsvMin( 1 ) << " "
-            << hsvMin( 2 ) << " " << hsvMin( 3 ) << std::endl;
-    std::cout << "hsvMax: " << hsvMax( 0 ) << " " << hsvMax( 1 ) << " "
-            << hsvMax( 2 ) << " " << hsvMax( 3 ) << std::endl;
 }
 
 void IPXMLParser::getProperties( cv::Scalar & hsvMin,
                                  cv::Scalar & hsvMax ) {
+    if ( this->hsvMin == cv::Scalar::zeros()
+            && this->hsvMax == cv::Scalar::zeros() )
+        throw std::runtime_error( "Exception: HSV values are zero!" );
+
     if ( this->hsvMin( 0 ) >= this->hsvMax( 0 ) )
         throw std::runtime_error( "hMin >= hMax" );
 
@@ -102,11 +113,6 @@ void IPXMLParser::getProperties( cv::Scalar & hsvMin,
 
     if ( this->hsvMin( 3 ) != 0.0 || this->hsvMax( 3 ) != 0.0 )
         throw std::runtime_error( "Exception: last value of threshold not 0!" );
-
-    if ( this->hsvMin == cv::Scalar::zeros()
-            && this->hsvMax == cv::Scalar::zeros() )
-        throw std::runtime_error(
-                "Exception: hsvMin == cv::Scalar::zeros() && hsvMax == cv::Scalar::zeros()" );
 
     hsvMin = this->hsvMin;
     hsvMax = this->hsvMax;

@@ -8,7 +8,6 @@
 #ifndef XMLPARSER_HPP_
 #define XMLPARSER_HPP_
 
-
 #include <iostream>
 #include <string>
 #include <stdexcept>
@@ -17,31 +16,30 @@
 
 #include <opencv2/opencv.hpp>
 
-
 class IPXMLParser {
 public:
-	IPXMLParser();
+    IPXMLParser();
 
-	IPXMLParser( const char * fileName );
+    IPXMLParser( const char * fileName );
 
-	~IPXMLParser() {}
+    ~IPXMLParser() {
+    }
 
-	void parseXML();
+    void parseXML();
 
-	void getProperties( cv::Scalar & hsvMin, \
-						cv::Scalar & hsvMax );
+    void getProperties( cv::Scalar & hsvMin,
+                        cv::Scalar & hsvMax );
 
-	void setFileName( const char * fileName );
+    void setFileName( const char * fileName );
 
 private:
-	std::string fileName;
+    std::string fileName;
 
-	TiXmlDocument doc;
+    TiXmlDocument doc;
 
-	TiXmlElement * el;
+    TiXmlElement * el;
 
-	cv::Scalar hsvMin, hsvMax;
+    cv::Scalar hsvMin, hsvMax;
 };
-
 
 #endif /* XMLPARSER_HPP_ */
