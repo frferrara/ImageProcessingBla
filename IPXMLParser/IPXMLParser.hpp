@@ -24,7 +24,7 @@ public:
 
 	IPXMLParser( const char * fileName );
 
-	~IPXMLParser();
+	~IPXMLParser() {}
 
 	void parseXML();
 
