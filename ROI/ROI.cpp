@@ -5,25 +5,23 @@
  *      Author: frferrara
  */
 
-
 #include "ROI.hpp"
 #include <iostream>
 
-
 IPState * ROI::Instance() {
-	if ( instance == NULL )
-		instance = new ROI;
+    if ( instance == NULL )
+        instance = new ROI;
 
-	return instance;
+    return instance;
 }
 
-cv::Mat ROI::processImg( ImageProcessing * ip, \
-						 const cv::Mat & img ) {
-	std::cout << "\nSTATE 2\n";
+Eigen::MatrixXd ROI::processImg( ImageProcessing * ip,
+                                 const cv::Mat & img ) {
+    std::cout << "\nSTATE 2\n";
 
-	changeState( ip, FullImg::Instance() );
+    changeState( ip, FullImg::Instance() );
 
-	return img;
+    return Eigen::MatrixXd::Zero( 1, 1 );
 }
 
 IPState * ROI::instance = NULL;

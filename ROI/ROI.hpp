@@ -8,28 +8,28 @@
 #ifndef ROI_HPP_
 #define ROI_HPP_
 
-
 #include <stdexcept>
+
+#include <opencv.hpp>
+#include <Eigen/Eigen>
 
 #include "IPState.hpp"
 #include "FullImg.hpp"
 
-
 class ROI : public IPState {
 public:
-	virtual ~ROI() {}
+    virtual ~ROI() { }
 
-	static IPState * Instance();
+    static IPState * Instance();
 
-	virtual cv::Mat processImg( ImageProcessing * ip, \
-								const cv::Mat & img );
+    virtual Eigen::MatrixXd processImg( ImageProcessing * ip,
+                                        const cv::Mat & img );
 
 protected:
-	ROI() {}
+    ROI() {}
 
 private:
-	static IPState * instance;
+    static IPState * instance;
 };
-
 
 #endif /* ROI_HPP_ */
