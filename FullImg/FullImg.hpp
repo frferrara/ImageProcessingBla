@@ -8,32 +8,33 @@
 #ifndef FULLIMG_HPP_
 #define FULLIMG_HPP_
 
-
 #include <stdexcept>
+
+#include <opencv.hpp>
+#include <Eigen/Eigen>
 
 #include "IPState.hpp"
 #include "ROI.hpp"
-
 
 class ROI;
 
 class FullImg : public IPState {
 public:
-	virtual ~FullImg() {}
+    virtual ~FullImg() {
+    }
 
-	static IPState * Instance();
+    static IPState * Instance();
 
-	virtual cv::Mat processImg( ImageProcessing * ip, \
-								const cv::Mat & img );
+    virtual Eigen::MatrixXd processImg( ImageProcessing * ip,
+                                        const cv::Mat & img );
 
 protected:
-	FullImg();
+    FullImg();
 
 private:
-	static IPState * instance;
+    static IPState * instance;
 
-	IPState * roi;
+    IPState * roi;
 };
-
 
 #endif /* FULLIMG_HPP_ */

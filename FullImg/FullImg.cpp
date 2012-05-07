@@ -5,29 +5,27 @@
  *      Author: frferrara
  */
 
-
 #include "FullImg.hpp"
 #include <iostream>
 
-
 IPState * FullImg::Instance() {
-	if ( instance == NULL )
-		instance = new FullImg;
+    if ( instance == NULL )
+        instance = new FullImg;
 
-	return instance;
+    return instance;
 }
 
-cv::Mat FullImg::processImg( ImageProcessing * ip, \
-							 const cv::Mat & img ) {
-	std::cout << "\nSTATE 1\n";
+Eigen::MatrixXd FullImg::processImg( ImageProcessing * ip,
+                                     const cv::Mat & img ) {
+    std::cout << "\nSTATE 1\n";
 
-	changeState( ip, roi );
+    changeState( ip, roi );
 
-	return img;
+    return Eigen::MatrixXd::Zero( 1, 1 );
 }
 
 FullImg::FullImg() {
-	roi = ROI::Instance();
+    roi = ROI::Instance();
 }
 
 IPState * FullImg::instance = NULL;
