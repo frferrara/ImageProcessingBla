@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Properties>
-	<Property name="hsvMin" hMin="2.0" vMin="4.0" sMin="3.0"/>
-	<Property name="hsvMax" hMin="150.0" vMin="230.0" sMin="255.0"/>
+	<Property name="hsvMin" hMin="2.0" sMin="4.0" vMin="3.0"/>
+	<Property name="hsvMax" hMax="150.0" sMax="230.0" vMax="255.0"/>
 </Properties>
