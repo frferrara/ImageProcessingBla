@@ -19,7 +19,7 @@ ImageProcessing::~ImageProcessing() {
 	delete state;
 }
 
-cv::Mat ImageProcessing::processImg( const cv::Mat & img ) {
+Eigen::MatrixXd ImageProcessing::processImg( const cv::Mat & img ) {
 	return state->processImg( this, img );
 }
 

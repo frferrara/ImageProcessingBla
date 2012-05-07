@@ -10,6 +10,7 @@
 
 
 #include <opencv.hpp>
+#include <Eigen/Eigen>
 
 
 class IPState;
@@ -20,7 +21,7 @@ public:
 
 	~ImageProcessing();
 
-	cv::Mat processImg( const cv::Mat & img );
+	Eigen::MatrixXd processImg( const cv::Mat & img );
 
 private:
 	friend class IPState;
