@@ -57,14 +57,12 @@ int main( int argc,
     try {
         if ( parser != NULL ) {
             parser->getProperties( hsvMin, hsvMax );
-
-            delete parser;
         }
     } catch ( std::runtime_error & e ) {
-        delete parser;
-
         std::cout << std::endl << e.what() << std::endl;
     }
+
+    delete parser;
 
     return 0;
 }
