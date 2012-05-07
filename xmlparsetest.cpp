@@ -61,6 +61,8 @@ int main( int argc,
             delete parser;
         }
     } catch ( std::runtime_error & e ) {
+        delete parser;
+
         std::cout << std::endl << e.what() << std::endl;
     }
 
