@@ -8,25 +8,24 @@
 #ifndef IPSTATE_HPP_
 #define IPSTATE_HPP_
 
-
 #include <opencv.hpp>
+#include <Eigen/Eigen>
 
 #include "ImageProcessing.hpp"
 
-
 class IPState {
 public:
-	virtual ~IPState() {};
+    virtual ~IPState() {}
+    ;
 
-	virtual cv::Mat processImg( ImageProcessing * ip, \
-								const cv::Mat & img ) = 0;
+    virtual Eigen::MatrixXd processImg( ImageProcessing * ip,
+                                        const cv::Mat & img ) = 0;
 
 protected:
-	IPState() {}
+    IPState() {}
 
-	void changeState( ImageProcessing * ip, \
-					  IPState * state );
+    void changeState( ImageProcessing * ip,
+                      IPState * state );
 };
-
 
 #endif /* IPSTATE_HPP_ */

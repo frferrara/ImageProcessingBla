@@ -5,11 +5,9 @@
  *      Author: frferrara
  */
 
-
 #include "IPState.hpp"
 
-
-void IPState::changeState( ImageProcessing * ip, \
-						   IPState * state) {
-	ip->changeState( state );
+void IPState::changeState( ImageProcessing * ip,
+                           IPState * state ) {
+    ip->changeState( state );
 }
