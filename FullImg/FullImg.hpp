@@ -15,15 +15,17 @@
 
 #include "IPState.hpp"
 #include "ROI.hpp"
+#include "IPXMLParser.hpp"
 
 class ROI;
 
 class FullImg : public IPState {
 public:
-    virtual ~FullImg() {
-    }
+    virtual ~FullImg();
 
     static IPState * Instance();
+
+    static IPState * Instance( const char * fileName );
 
     virtual Eigen::MatrixXd processImg( ImageProcessing * ip,
                                         const cv::Mat & img );
@@ -31,10 +33,16 @@ public:
 protected:
     FullImg();
 
+    FullImg( const char * fileName );
+
 private:
     static IPState * instance;
 
+    IPXMLParser * propertyParser;
+
     IPState * roi;
+
+    cv::Scalar hsvMin, hsvMax;
 };
 
 #endif /* FULLIMG_HPP_ */

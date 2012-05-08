@@ -5,24 +5,29 @@
  *      Author: frferrara
  */
 
-
 #include "ImageProcessing.hpp"
 #include "IPState.hpp"
 #include "FullImg.hpp"
 
-
 ImageProcessing::ImageProcessing() {
-	state = FullImg::Instance();
+    state = NULL;
+}
+
+ImageProcessing::ImageProcessing( const char * FullImgPropertyFile,
+                                  const char * ROIPropertyFile ) {
+    ROI::Instance( ROIPropertyFile );
+
+    state = FullImg::Instance( FullImgPropertyFile );
 }
 
 ImageProcessing::~ImageProcessing() {
-	delete state;
+    delete state;
 }
 
 Eigen::MatrixXd ImageProcessing::processImg( const cv::Mat & img ) {
-	return state->processImg( this, img );
+    return state->processImg( this, img );
 }
 
 void ImageProcessing::changeState( IPState * state ) {
-	this->state = state;
+    this->state = state;
 }

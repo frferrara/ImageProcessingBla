@@ -31,6 +31,9 @@ add_subdirectory( IPXMLParser )
 add_executable( xmlparsetest xmlparsetest.cpp )
 target_link_libraries( xmlparsetest ImageProcessing IPXMLParser )
 
+add_executable( iptest iptest.cpp )
+target_link_libraries( iptest ImageProcessing )
+
 enable_testing()
 
 macro( do_xmltest arg result )
