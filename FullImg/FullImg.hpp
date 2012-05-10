@@ -30,19 +30,35 @@ public:
     virtual Eigen::MatrixXd processImg( ImageProcessing * ip,
                                         const cv::Mat & img );
 
+    cv::Mat getImg( int type );
+
 protected:
     FullImg();
 
     FullImg( const char * fileName );
 
 private:
+    void initialize( const cv::Mat & img );
+
+    bool initialized;
+
     static IPState * instance;
 
     IPXMLParser * propertyParser;
 
     IPState * roi;
 
+    cv::Size imgSize;
+
     cv::Scalar hsvMin, hsvMax;
+
+    cv::Mat morphKernel, hsv, thr, dil;
+
+    enum {
+        HSV = 0,
+        THR = 1,
+        DIL = 2
+    };
 };
 
 #endif /* FULLIMG_HPP_ */
